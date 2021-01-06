@@ -46,14 +46,14 @@ def read_data(source_file):
 
     df = pd.read_csv(source_file)
 
-    print(f"There are {len(df)} tickets in the imported dataset.")
+    print(f"There are {len(df)} tweets in the imported dataset.")
     print("raw data:")
     print(df.head())
 
     return df
 
 
-def preprocess(df, ticket_desc_field):
+def preprocess(df, desc_field):
 
     """
     Basic NLP preprocessing (remove non-alphabet characters, remove short words, make all lowercase)
@@ -61,7 +61,7 @@ def preprocess(df, ticket_desc_field):
     Parameters:
     ----------
     df : source dataframe
-    ticket_desc_field: field from source data that contains the ticket descriptions
+    desc_field: field from source data that contains the descriptions
 
     Returns:
     -------
@@ -69,7 +69,7 @@ def preprocess(df, ticket_desc_field):
     """
 
     # removing everything except alphabets`
-    df['clean_desc'] = df[ticket_desc_field].str.replace("[^a-zA-Z#]", " ")
+    df['clean_desc'] = df[desc_field].str.replace("[^a-zA-Z#]", " ")
 
     # removing short words
     df['clean_desc'] = df['clean_desc'].apply(lambda x: ' '.join([w for w in x.split() if len(w)>2]))
@@ -92,7 +92,7 @@ def grams_and_stop_removals(grams, word_list):
     Parameters:
     ----------
     grams : bigrams or trigrams
-    word_list: list of list of words from ticket descriptions
+    word_list: list of list of words from descriptions
 
     Returns:
     -------
@@ -109,7 +109,6 @@ def grams_and_stop_removals(grams, word_list):
     trigram_mod = gensim.models.phrases.Phraser(trigram)
 
     # Remove Stop Words
-    #TODO: update extended stop words for tweet corpus
     stop_words.extend(['tweet','pfizerbiontech','pfizervaccine','covidvaccine','vaccine','https'])
     data_words_nostops = [[word for word in simple_preprocess(str(doc)) if word not in stop_words] for doc in word_list]
 
@@ -354,7 +353,7 @@ def topic_analytics_and_export(df, df_topic):
     print("Topic Distribution Across Documents")
     print(df_dominant_topics)
 
-    # join raw ticket data to dominant topic DF and write to CSV
+    # join raw data to dominant topic DF and write to CSV
     df_final = pd.concat([df, df_dominant_topic], axis=1)
     df_final.to_csv('Tweet Data with Topics.csv', index=False)
 
