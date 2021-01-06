@@ -72,7 +72,7 @@ def preprocess(df, ticket_desc_field):
     df['clean_desc'] = df[ticket_desc_field].str.replace("[^a-zA-Z#]", " ")
 
     # removing short words
-    df['clean_desc'] = df['clean_desc'].apply(lambda x: ' '.join([w for w in x.split() if len(w)>1]))
+    df['clean_desc'] = df['clean_desc'].apply(lambda x: ' '.join([w for w in x.split() if len(w)>2]))
 
     # make all text lowercase
     df['clean_desc'] = df['clean_desc'].apply(lambda x: x.lower())
@@ -101,7 +101,7 @@ def grams_and_stop_removals(grams, word_list):
     """
 
     # Build the bigram and trigram models
-    bigram = gensim.models.Phrases(word_list, min_count=2, threshold=10) # min_count = min frequency for word/gram; higher threshold fewer phrases.
+    bigram = gensim.models.Phrases(word_list, min_count=5, threshold=10) # min_count = min frequency for word/gram; higher threshold fewer phrases.
     trigram = gensim.models.Phrases(bigram[word_list], threshold=10)  
 
     # Faster way to get a sentence clubbed as a trigram/bigram
@@ -110,7 +110,7 @@ def grams_and_stop_removals(grams, word_list):
 
     # Remove Stop Words
     #TODO: update extended stop words for tweet corpus
-    stop_words.extend(['tweet'])
+    stop_words.extend(['tweet','pfizerbiontech','pfizervaccine','covidvaccine','vaccine','https'])
     data_words_nostops = [[word for word in simple_preprocess(str(doc)) if word not in stop_words] for doc in word_list]
 
     # make grams
@@ -356,7 +356,7 @@ def topic_analytics_and_export(df, df_topic):
 
     # join raw ticket data to dominant topic DF and write to CSV
     df_final = pd.concat([df, df_dominant_topic], axis=1)
-    df_final.to_csv('Ticket Data with Topics.csv', index=False)
+    df_final.to_csv('Tweet Data with Topics.csv', index=False)
 
 
 
@@ -396,7 +396,7 @@ def main():
 
     # Train single LDA model
     # alpha = auto, symmetric, asymmetric
-    lda_model = train_topic_model(corpus=corpus, id2word=id2word, texts=data_lemmatized, num_topics=8, chunksize=50, iterations=10, passes=100, alpha='auto')
+    lda_model = train_topic_model(corpus=corpus, id2word=id2word, texts=data_lemmatized, num_topics=6, chunksize=40, iterations=20, passes=100, alpha='auto')
     # Apply model to Description list to get optimal topic per document
     df_topic_sents_keywords = format_topics_sentences(ldamodel=lda_model, corpus=corpus, texts=desc_list)
     # Analytics and export
