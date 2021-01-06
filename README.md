@@ -6,13 +6,13 @@ Basic steps in topic modeling code:
 1. Pre-processing
 2. Bi-grams/Tri-grams and Stop Word removals
 3. Lemmatization and term frequency
-(3a.) Determine optimal number of topics using Mallet
+3a. Determine optimal number of topics using Mallet
 4. Train LDA Model
 5. Assign dominant topic per document
-6. Basic Analytics
+6. Basic analytics
 
-Number of Topics - Optimization with Mallet
+## Number of Topics - Optimization with Mallet
 ![alt text](https://github.com/datavizhokie/pfizer-vaccine-tweet-lda/blob/master/Mallet%20Topic%20Coherence.png)
 
-Intertopic Distance Map
+## Intertopic Distance Map
 ![alt text](https://github.com/datavizhokie/pfizer-vaccine-tweet-lda/blob/master/intertopic%20distance%20map.png)
