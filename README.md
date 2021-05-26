@@ -1,7 +1,12 @@
 # pfizer-vaccine-tweet-lda
-Use LDA topic modeling on Pfizer vaccine tweets corpus
 
-Basic steps in topic modeling code:
+## Approach
+
+The goal is to use LDA topic modeling on Pfizer vaccine tweets corpus. "In natural language processing, the Latent Dirichlet Allocation (LDA) is a generative statistical model that allows sets of observations to be explained by unobserved groups that explain why some parts of the data are similar."
+
+https://en.wikipedia.org/wiki/Latent_Dirichlet_allocation
+
+## Basic steps in topic modeling code:
 
 1. Pre-processing
 2. Bi-grams/Tri-grams and Stop Word removals
