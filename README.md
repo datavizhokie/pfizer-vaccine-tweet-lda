@@ -12,14 +12,17 @@ Basic steps in topic modeling code:
 7. Basic analytics
 
 ## Number of Topics - Optimization with Mallet
-![alt text](https://github.com/datavizhokie/pfizer-vaccine-tweet-lda/blob/master/Mallet%20Topic%20Coherence.png)
+<img src="https://github.com/datavizhokie/pfizer-vaccine-tweet-lda/blob/master/Mallet%20Topic%20Coherence.png" width=50% height=50%>
 
 ## Intertopic Distance Map
-![alt text](https://github.com/datavizhokie/pfizer-vaccine-tweet-lda/blob/master/intertopic%20distance%20map.png)
+<img src="https://github.com/datavizhokie/pfizer-vaccine-tweet-lda/blob/master/intertopic%20distance%20map.png" width=75% height=75%>
 
 ## Discussion
 
-Although 8 topics was optimal according to the coherence score in the Mallet run, I chose 6 for better consumer digestion. Overall coherence for the trained LDA job with 6 topics is 0.58. From the intertopic distance visualization, we can see that many of the topics overlap. This data was collected via Tweepy with a distinct hashtag (#PfizerBioNTech). Thus, we cannot expect to have very distinct topics. Still, the coherence score is adequate.
+Although 8 topics was optimal according to the coherence score in the Mallet run, I chose 6 for better consumer digestion. Overall coherence for the trained LDA job with 6 topics is 0.58. From the intertopic distance visualization, we can see that many of the topics overlap. This data was collected via Tweepy with a distinct hashtag (#PfizerBioNTech). Thus, we cannot expect to have very distinct topics... or advanced lexicons ;) 
 
+![Alt Text](https://media.giphy.com/media/26BRNSms6vm0qR8kg/giphy.gif)
 
-Data Source: https://www.kaggle.com/gpreda/pfizer-vaccine-tweets
+Still, the coherence score is adequate, but this corpus is not fantastic for topic modeling.
+
+*Data Source: https://www.kaggle.com/gpreda/pfizer-vaccine-tweets*
